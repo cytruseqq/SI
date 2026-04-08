@@ -1,0 +1,12 @@
+1. Zmiana liczby próbek
+Im więcej próbek treningowych, tym model dokładniej znajduje prawdziwe wagi i bias. Przy małej liczbie próbek (np. 100) szum ma większy wpływ na wynik, a wagi są mniej precyzyjne. Przy 1 000 000 próbek model nie uruchamia się przez zbyt duże obciążenie.
+
+2. Zmiana współczynnika uczenia eta
+0,0001 — uczenie bardzo wolne, po 100 epokach model ledwo zbliża się do celu; potrzeba znacznie więcej epok
+0,001 — uczenie stabilne, ale wolniejsze niż domyślne; wymaga więcej epok do zbieżności
+0,1 — uczenie szybkie, ale ryzykowne; przy nieodpowiednich danych może wystąpić niestabilność
+1 — model najczęściej dywerguje — loss zamiast maleć, rośnie, ponieważ kroki gradientu są za duże i algorytm "przeskakuje" minimum
+Wniosek ogólny: zbyt małe eta = wolna nauka, zbyt duże eta = brak zbieżności. Optymalna wartość (np. 0,01–0,02) balansuje szybkość i stabilność.
+
+3. Zmiana targets na 13·xs + 7·zs − 12
+Model poprawnie znajduje wagi bliskie 13, 7 i bias bliski −12, co potwierdza, że algorytm gradientu prostego działa niezależnie od konkretnych wartości w funkcji liniowej. Model "odkrywa" parametry funkcji wyłącznie na podstawie danych treningowych — bez żadnej wiedzy o wzorze wejściowym.
